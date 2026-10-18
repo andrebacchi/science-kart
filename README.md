@@ -7,6 +7,12 @@ Jogo de kart 3D estilo Mario Kart 64 com cientistas famosos como pilotos. Um ún
 ## Controles
 Setas ou WASD para dirigir, Espaço ou Shift para derrapar, E ou X para usar o item, Q para o poder do piloto, V troca a câmera, M liga/desliga a música.
 
+## Tutorial
+Os textos de tutorial só aparecem pelo botão **Tutorial** do menu inicial, que leva direto à primeira pista (Gaiola dos Ratos). Pelo fluxo normal de Corrida a pista 1 não mostra tutorial.
+
+## Celular na horizontal
+Em telas baixas o painel (posição, volta, minimapa, botões) e os botões de toque ficam compactos nos cantos, para não cobrir o kart.
+
 ## Controle (joystick)
 Funciona com controle padrão (Xbox, PlayStation, GameSir no celular etc.). Na corrida: analógico ou direcional vira, A ou RT aceleram, B ou LT freiam, RB ou X derrapam, LB usa o item, Y usa o poder, L3 olha para trás, R3 troca a câmera, Start pausa, Back liga o filtro N64. Nos menus: direcional ou analógico move o destaque, A confirma, B volta e Start abre o botão principal. Com controle conectado, os botões de toque somem.
 

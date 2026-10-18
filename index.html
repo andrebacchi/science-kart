@@ -153,6 +153,33 @@ details.help{border:2px solid var(--ink);border-radius:12px;background:#fff;padd
 body.padon .tbtn,body.padon #joy{display:none!important}
 .padfocus{outline:4px solid var(--coral)!important;outline-offset:3px}
 
+@media (max-height:480px){
+  .hud{top:calc(4px + env(safe-area-inset-top,0px))}
+  .hud.l{left:max(10px,env(safe-area-inset-left,0px))}
+  #pos{font-size:36px}#pos small{font-size:15px;margin-top:2px}
+  #lap{font-size:15px;margin-top:2px}#lap .lbl{font-size:10px}
+  #time{font-size:13px;margin-top:3px}
+  #item{width:58px;height:58px}#pow{width:36px;height:36px}
+  .hud.i{gap:5px}
+  .hud.r{right:max(10px,env(safe-area-inset-right,0px));flex-direction:row-reverse;align-items:flex-start;gap:10px}
+  #mini{width:78px;height:78px}
+  .pills{flex-direction:column;align-items:flex-end;gap:3px}
+  .pill{font-size:9px;padding:2px 8px;letter-spacing:.05em;border-width:1.5px}
+  .hud.c{top:calc(66px + env(safe-area-inset-top,0px));width:min(380px,calc(100vw - 440px))}
+  #banner{padding:4px 8px;font-size:11px;line-height:1.3;border-width:2px;border-radius:10px;gap:6px;box-shadow:0 3px 0 var(--ink)}
+  #banner .chip{font-size:10px;padding:2px 5px}
+  #toast{top:44%;font-size:22px}
+  #count{font-size:72px;top:38%}
+  #hint{font-size:10px;bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+  .tbtn{border-width:2px;box-shadow:0 3px 0 var(--ink)}
+  #bDrift{width:76px;height:76px;font-size:11px;right:calc(max(10px,env(safe-area-inset-right,0px)) + 2px);bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+  #bItem{width:56px;height:56px;font-size:12px;right:calc(max(10px,env(safe-area-inset-right,0px)) + 90px);bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+  #bPower{width:48px;height:48px;font-size:10px;right:calc(max(10px,env(safe-area-inset-right,0px)) + 154px);bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+  #bBrake{width:46px;height:46px;font-size:10px;right:calc(max(10px,env(safe-area-inset-right,0px)) + 16px);bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  #bLook{width:40px;height:40px;font-size:9px;right:calc(max(10px,env(safe-area-inset-right,0px)) + 70px);bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  #joy{width:120px;height:46px;margin:-23px 0 0 -60px}#knob{width:36px;height:36px;margin:-18px 0 0 -18px}
+}
+
 /* BACCHI LAB pattern: back link, QR code, install */
 #appbar{position:fixed;left:max(10px,env(safe-area-inset-left,0px));top:calc(10px + env(safe-area-inset-top,0px));z-index:20;display:none;flex-wrap:wrap;align-items:center;gap:6px;max-width:calc(100vw - 140px)}
 body:has(#ovPress:not([hidden])) #appbar,body:has(#ovTitle:not([hidden])) #appbar{display:flex}
@@ -220,6 +247,7 @@ dialog.dlg::backdrop{background:rgba(29,35,64,.7)}
     <p class="sub lab" id="mpLab">Jogadores</p>
     <div class="seg" id="segMP" role="group" aria-label="Jogadores"><button type="button" data-v="1">1 jogador</button><button type="button" data-v="2">2 jogadores</button></div>
     <div class="row big"><button class="btn" id="raceBtn">Corrida</button><button class="btn" id="battleBtn">Batalha</button></div>
+    <div class="row"><button class="btn alt" id="tutBtn" type="button">Tutorial: aprenda a jogar</button></div>
     <details class="help"><summary>Controles</summary>
     <div class="keys" id="keysDesk">
       <b>↑ / W</b><span>acelerar</span>
@@ -799,7 +827,7 @@ function makeCap3D(){const g=new THREE.Group(),body=new THREE.Group();
   const gl=new THREE.Mesh(capGeo.glint,capG);gl.position.set(.3,.34,.12);gl.scale.set(1,3,1);
   body.add(t,u,b,d,ol,gl);body.rotation.z=.45;g.add(body);g.scale.setScalar(1.55);return g;}
 [[.16,[-6,-2,2,6]],[.63,[-5,-1.5,2,5.5]]].forEach(([f,offs])=>offs.forEach(o=>{const a=trackAt(L*f,o);const s=makeCap3D();s.position.set(a.x,1.2,a.z);scene.add(s);pickups.push({s,x:a.x,z:a.z,on:true,t:0});}));
-TRACKS.push({key:'treino',name:'Caixa de biotério',desc:'Pista de treino dentro de uma gaiola de rato gigante. 3 voltas; o tutorial aparece enquanto você corre.',tut:true,data:snapData(),
+TRACKS.push({key:'treino',name:'Caixa de biotério',desc:'Pista de treino dentro de uma gaiola de rato gigante. 3 voltas; o tutorial fica no botão Tutorial do menu inicial.',tut:true,data:snapData(),
   pads:PADS.map(p=>({s:p.s,o:p.o})),pickups,bounds:{minX,maxX,minZ,maxZ,cx:CX,cz:CZ},
   env:{sky:[0xffffff,0xffb894],fog:[FOG,0xf0bfa0],hemi:[0xffffff,0xffd2a8],hemiG:[0x9a9484,0x7a6a8a],sun:[0xfff1d6,0xffa060],sunI:[.78,.9]}});TRK=TRACKS[0];
 // sprite FX art (André): flames, steam, spores, bubbles, colony — cut from his sheets (chroma-keyed, 16-28 colour palettes)
@@ -1935,11 +1963,12 @@ const TUT=[
   {id:'pad',txt:()=>'As <b>placas laranja com setas</b> dão impulso. Fora da pista, o kart perde velocidade.'},
   {id:'power',txt:()=>(touchMode?'Toque em <b>PODER</b>':'Aperte <b>Q</b>')+` para usar o poder especial, que só vale uma vez por corrida. <b>${POWERS[playerKey].name}:</b> ${POWERS[playerKey].desc}`},
   {id:'slip',txt:()=>'Fique <b>colado atrás de outro kart</b> por 2 segundos para pegar o <b>vácuo</b>: o kart ganha um impulso por mais 2 segundos.'}];
-const tdone={};let tutEndT=0;
-function tut(id){if(!TRK.tut||MP||tdone[id]||mode!=='race')return;tdone[id]=true;beep(988,.08,'square',null,.04);setTimeout(()=>beep(1318,.14,'square',null,.04),80);toast('Boa!',1);
+const tdone={};let tutEndT=0;let TUTMODE=false;
+function tut(id){if(!TRK.tut||!TUTMODE||MP||tdone[id]||mode!=='race')return;tdone[id]=true;beep(988,.08,'square',null,.04);setTimeout(()=>beep(1318,.14,'square',null,.04),80);toast('Boa!',1);
   if(TUT.every(t=>tdone[t.id]))tutEndT=6;}
 function tutUpdate(dt){const b=$('banner');if(BATTLE){if(mode==='count'||(mode==='race'&&raceT<7))showBanner('BATALHA · '+ARENA.name.toUpperCase(),SMP?'Colete as <b>amostras</b> espalhadas pela arena. Levar um golpe derruba parte das suas para os outros pegarem. As douradas valem 3. Vence quem tiver mais quando o tempo acabar.':'Zere a <b>viabilidade</b> dos rivais com itens e batidas com turbo. Cair da arena custa 34 HP. Pegue a <b>cruz verde</b> para recuperar 30 HP.');else b.classList.add('off');return;}
   if(SURTO){if(mode==='count'||(mode==='race'&&raceT<9))showBanner('SURTO','Um piloto começa <b>infectado</b> e perde viabilidade rápido. <b>Encoste em outro</b> para passar a infecção. Quem zerar sai; o último vence. A vacina bloqueia o contágio.');else b.classList.add('off');return;}if(mode==='count'){showBanner('LARGADA',MP?'Os dois: acelerem (<b>W</b> e <b>↑</b>) só quando o <b>1</b> aparecer para largar com turbo. Segurar antes faz o kart patinar.':touchMode?'O kart acelera sozinho quando aparecer <b>VAI!</b>':'Aperte <b>↑</b> só quando o <b>1</b> aparecer: largada com turbo. Segurar antes faz o kart patinar.');return;}
+  if(TRK.tut&&!TUTMODE){b.classList.add('off');return;}
   if(!TRK.tut){if(mode==='race'&&raceT<7&&TRK.tip)showBanner(TRK.chip||'PISTA',TRK.tip);else b.classList.add('off');return;}
   if(mode!=='race'||MP){b.classList.add('off');return;}
   const n=TUT.filter(t=>tdone[t.id]).length;
@@ -2817,8 +2846,8 @@ function setHud(on){document.body.classList.toggle('mp',on&&MP);$('split').hidde
 let pressed=false;
 function menuEnv(){BATTLE=false;syncFlags();hideBattleProps();clearSamples();setBattleEnv(false);}
 function toTitle(){mode='title';menuEnv();setHud(false);if(!pressed){showOnly('ovPress');$('pressSub').textContent=touchMode?'ou toque na tela':'ou Enter';$('ovPress').focus();}else{showOnly('ovTitle');$('raceBtn').focus();}}
-function toRaceMenu(){wantBattle=false;menuEnv();mode='title';setHud(false);syncOpts();showOnly('ovRace');$('raceNext').focus();}
-function toBattleMenu(){wantBattle=true;menuEnv();mode='title';setHud(false);syncOpts();showOnly('ovBattle');$('battleNext').focus();}
+function toRaceMenu(){TUTMODE=false;wantBattle=false;menuEnv();mode='title';setHud(false);syncOpts();showOnly('ovRace');$('raceNext').focus();}
+function toBattleMenu(){TUTMODE=false;wantBattle=true;menuEnv();mode='title';setHud(false);syncOpts();showOnly('ovBattle');$('battleNext').focus();}
 function buildStages(){const el=$('stageList');el.innerHTML='';
   const list=wantBattle?ARENAS.map((A,i)=>({n:A.name,d:A.desc+'.',img:A.mini.toDataURL(),i})):TRACKS.map((t,i)=>({n:t.name,d:t.desc,img:t.miniBase.toDataURL(),i}));const cur=wantBattle?arenaIdx:TI;
   el.classList.toggle('one',list.length===1);
@@ -2863,7 +2892,7 @@ function startRace(){audioOn();syncFlags();playerKey=PLAYABLE[selIdx];if(MP&&sel
   shots.splice(0).forEach(s=>scene.remove(s.s));hazards.splice(0).forEach(h=>scene.remove(h.m));fxRings.splice(0).forEach(f=>scene.remove(f.m));$('ink').style.opacity=0;pickups.forEach(p=>{p.on=true;p.s.visible=true;});
   for(const k in tdone)delete tdone[k];tutEndT=0;steerAccum=0;wrongT=0;bannerHTML='';
   mode='count';countT=4;raceT=0;doneT=0;startReset();initViews();$('count').textContent='';
-  canvas.focus();if(touchMode){$('hint').hidden=false;setTimeout(()=>$('hint').hidden=true,7000);}}
+  canvas.focus();if(touchMode&&TUTMODE){$('hint').hidden=false;setTimeout(()=>$('hint').hidden=true,7000);}}
 function rankToast(){players.forEach(h=>{const q=standings().indexOf(h)+1;if(MP)TR=h;toast(q===1?'Vitória!':q+'º lugar',3);});}
 function finish(r=player){const p=standings().indexOf(r)+1;
   if(MP&&players.some(o=>!o.finished)){TR=r;toast('Chegou em '+p+'º!',3);beep(784,.2,'square',null,.05);if(!mpWait){mpWait=raceT+45;const o=players.find(x=>!x.finished);TR=o;toast('O outro já chegou: 45 s para terminar!',2.6,true);}return;}
@@ -2888,7 +2917,7 @@ function showResults(){if(BATTLE||SURTO){const ranks=standings(),pos=ranks.index
   showOnly('ovRes');setHud(false);$('againBtn').focus();}
 function pause(){if(mode!=='race'&&mode!=='count')return;pausedFrom=mode;mode='paused';showOnly('ovPause');$('resumeBtn').focus();}
 let pausedFrom='race';function resume(){mode=pausedFrom;showOnly(null);canvas.focus();}
-$('raceBtn').onclick=toRaceMenu;$('battleBtn').onclick=toBattleMenu;$('raceBack').onclick=toTitle;$('battleBack').onclick=toTitle;$('raceNext').onclick=toStage;$('battleNext').onclick=toStage;
+$('tutBtn').onclick=()=>{TUTMODE=true;wantBattle=false;MP=false;syncMP();RSUB='cl';MIR=false;syncFlags();setTrack(0,false);camInit=false;toSelect();};$('raceBtn').onclick=toRaceMenu;$('battleBtn').onclick=toBattleMenu;$('raceBack').onclick=toTitle;$('battleBack').onclick=toTitle;$('raceNext').onclick=toStage;$('battleNext').onclick=toStage;
 $('stageBack').onclick=()=>wantBattle?toBattleMenu():toRaceMenu();$('stageNext').onclick=toSelect;$('homeBtn').onclick=toTitle;$('homeBtn2').onclick=toTitle;
 $('itemsBtn').onclick=()=>{const l=$('ilist');if(!l.childElementCount){for(const cat in ITEM_CATS){const h=document.createElement('h3');h.className='icat';h.textContent=ITEM_CATS[cat];l.appendChild(h);
     for(const k of ITEM_KEYS){if(ITEMS[k].cat!==cat)continue;const d=document.createElement('div');d.className='irow';d.innerHTML=`<img alt="" src="${ICONS[k].toDataURL()}"><div><b>${ITEMS[k].name}</b><span>${ITEMS[k].desc}</span></div>`;l.appendChild(d);}}}
