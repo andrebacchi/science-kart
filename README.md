@@ -11,7 +11,7 @@ Setas ou WASD para dirigir, Espaço ou Shift para derrapar, E ou X para usar o i
 Funciona com controle padrão (Xbox, PlayStation, GameSir no celular etc.). Na corrida: analógico ou direcional vira, A ou RT aceleram, B ou LT freiam, RB ou X derrapam, LB usa o item, Y usa o poder, L3 olha para trás, R3 troca a câmera, Start pausa, Back liga o filtro N64. Nos menus: direcional ou analógico move o destaque, A confirma, B volta e Start abre o botão principal. Com controle conectado, os botões de toque somem.
 
 ## Música
-A música só toca na corrida: começa quando a contagem termina e acelera uns 10% na última volta (o tom não muda). A tecla M liga e desliga. O arquivo `audio/musica.mp3` não faz parte do repositório; coloque a sua faixa nesse caminho (loop, 30% de volume). Sem ele o jogo roda sem música.
+A faixa da primeira pista (Gaiola dos Ratos) fica em `audio/gaiola-dos-ratos.mp3`, música original do projeto. Ela só toca na corrida: começa quando a contagem termina e acelera uns 10% na última volta (o tom não muda). A tecla M liga e desliga. Sem o arquivo, o jogo roda sem música.
 
 ## Instalar e QR code
 Na tela inicial há o botão ‹ Bacchi Lab (volta ao hub), Instalar (PWA, funciona sem internet depois da primeira visita) e QR code para abrir no celular.
