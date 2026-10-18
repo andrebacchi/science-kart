@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Science Kart</title>
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#1d2340"><link rel="icon" type="image/png" sizes="64x64" href="icons/favicon-64.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Science Kart"><title>Science Kart</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;800&display=swap">
@@ -149,6 +149,32 @@ details.help{border:2px solid var(--ink);border-radius:12px;background:#fff;padd
 @keyframes blink{0%{opacity:1}100%{opacity:0}}
 @media (prefers-reduced-motion: reduce){.n64 .word,.n64 .word i,.press{animation:none}}
 
+
+body.padon .tbtn,body.padon #joy{display:none!important}
+.padfocus{outline:4px solid var(--coral)!important;outline-offset:3px}
+
+/* BACCHI LAB pattern: back link, QR code, install */
+#appbar{position:fixed;left:max(10px,env(safe-area-inset-left,0px));top:calc(10px + env(safe-area-inset-top,0px));z-index:20;display:none;flex-wrap:wrap;align-items:center;gap:6px;max-width:calc(100vw - 140px)}
+body:has(#ovPress:not([hidden])) #appbar,body:has(#ovTitle:not([hidden])) #appbar{display:flex}
+#appbar .hub{font-family:var(--display);font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--paper);text-decoration:none;text-shadow:var(--outline);padding:4px 8px 4px 2px}
+#appbar .hub:hover,#appbar .hub:focus-visible{color:var(--gold)}
+dialog.dlg{width:min(92vw,430px);max-height:94dvh;padding:0;overflow:auto;border:3px solid var(--ink);border-radius:22px;background:var(--paper);color:var(--ink);font-family:var(--body);box-shadow:0 6px 0 var(--ink),0 18px 40px rgba(29,35,64,.3)}
+dialog.dlg::backdrop{background:rgba(29,35,64,.7)}
+.dlg .top{display:flex;justify-content:flex-end;padding:10px 10px 0}.dlg .top .pill{color:var(--paper);font-size:12px;min-height:28px}
+.dlg .body{display:flex;flex-direction:column;gap:10px;padding:2px 18px 18px;text-align:center}
+.dlg .eyebrow{font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--lab)}
+.dlg h3{margin:0;font-family:var(--display);font-weight:400;font-size:28px;line-height:1.1;color:var(--ink)}
+.dlg p{margin:0;font-size:14px;line-height:1.42;font-weight:600}.dlg .fine{font-size:11.5px;opacity:.7}
+.dlg .fora{text-align:left;padding:8px 10px;border:2px solid var(--coral);border-radius:10px;font-size:13px}
+.dlg .acts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.dlg .btn{font-size:17px;padding:8px 16px}
+.dlg .btn.ghost{background:var(--paper)}
+.dlg kbd{display:inline-block;padding:0 .4em;border:2px solid var(--ink);border-radius:6px;background:#fff;font-family:var(--display)}
+.qr-box{align-self:center;width:min(100%,270px);padding:10px;border-radius:10px;background:#fff;border:2px solid var(--ink)}.qr-box svg{display:block;width:100%;height:auto}
+.qr-end{font-family:var(--display);font-size:16px;word-break:break-all;color:var(--lab)}
+.dlg .tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.dlg .chip{font-family:var(--display);font-size:14px;padding:.35em .95em;border-radius:999px;border:2px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer}
+.dlg .chip[aria-pressed="true"]{background:var(--gold)}
+.dlg .steps{margin:0;padding-left:1.35em;display:flex;flex-direction:column;gap:6px;text-align:left;font-size:13.5px;line-height:1.45;font-weight:600}
 </style>
 
 <canvas id="c" tabindex="0" aria-label="Corrida 3D"></canvas>
@@ -184,6 +210,10 @@ details.help{border:2px solid var(--ink);border-radius:12px;background:#fff;padd
   <div class="press">APERTE START<small id="pressSub">ou Enter</small></div>
   <div class="copy">© 2026 André Bacchi · protótipo</div>
 </button>
+
+<div id="appbar"><a class="hub" href="https://andrebacchi.github.io/bacchilab/">‹ Bacchi Lab</a><button class="pill" id="instalar-btn" type="button" hidden>Instalar</button><button class="pill" id="qr-btn" type="button">QR code</button></div>
+<dialog class="dlg" id="qr" lang="pt-BR" aria-label="QR code do Science Kart"><div class="top"><button class="pill" type="button" data-fechar>Fechar</button></div><div class="body"><span class="eyebrow">Abra no seu celular</span><h3>Science Kart</h3><div class="qr-box"><svg role="img" aria-label="QR code para andrebacchi.github.io/science-kart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 37" shape-rendering="crispEdges"><rect width="37" height="37" fill="#fff"/><path d="M2 2h7v1h-7zM10 2h1v1h-1zM12 2h2v1h-2zM15 2h3v1h-3zM20 2h1v1h-1zM25 2h1v1h-1zM28 2h7v1h-7zM2 3h1v1h-1zM8 3h1v1h-1zM11 3h1v1h-1zM14 3h3v1h-3zM18 3h1v1h-1zM20 3h2v1h-2zM28 3h1v1h-1zM34 3h1v1h-1zM2 4h1v1h-1zM4 4h3v1h-3zM8 4h1v1h-1zM12 4h1v1h-1zM16 4h1v1h-1zM19 4h5v1h-5zM25 4h2v1h-2zM28 4h1v1h-1zM30 4h3v1h-3zM34 4h1v1h-1zM2 5h1v1h-1zM4 5h3v1h-3zM8 5h1v1h-1zM10 5h1v1h-1zM12 5h2v1h-2zM18 5h2v1h-2zM23 5h3v1h-3zM28 5h1v1h-1zM30 5h3v1h-3zM34 5h1v1h-1zM2 6h1v1h-1zM4 6h3v1h-3zM8 6h1v1h-1zM10 6h1v1h-1zM13 6h1v1h-1zM18 6h2v1h-2zM21 6h1v1h-1zM24 6h1v1h-1zM28 6h1v1h-1zM30 6h3v1h-3zM34 6h1v1h-1zM2 7h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM13 7h1v1h-1zM17 7h1v1h-1zM20 7h1v1h-1zM22 7h2v1h-2zM25 7h2v1h-2zM28 7h1v1h-1zM34 7h1v1h-1zM2 8h7v1h-7zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM26 8h1v1h-1zM28 8h7v1h-7zM10 9h1v1h-1zM13 9h2v1h-2zM16 9h1v1h-1zM19 9h6v1h-6zM26 9h1v1h-1zM2 10h1v1h-1zM6 10h1v1h-1zM8 10h4v1h-4zM13 10h1v1h-1zM17 10h1v1h-1zM19 10h1v1h-1zM22 10h10v1h-10zM34 10h1v1h-1zM2 11h1v1h-1zM5 11h1v1h-1zM11 11h2v1h-2zM17 11h3v1h-3zM23 11h1v1h-1zM25 11h1v1h-1zM27 11h1v1h-1zM31 11h3v1h-3zM4 12h2v1h-2zM7 12h4v1h-4zM12 12h1v1h-1zM15 12h3v1h-3zM20 12h1v1h-1zM25 12h1v1h-1zM28 12h1v1h-1zM31 12h1v1h-1zM33 12h1v1h-1zM5 13h1v1h-1zM10 13h2v1h-2zM13 13h1v1h-1zM15 13h1v1h-1zM17 13h2v1h-2zM21 13h2v1h-2zM24 13h1v1h-1zM27 13h2v1h-2zM33 13h1v1h-1zM2 14h8v1h-8zM12 14h4v1h-4zM17 14h2v1h-2zM24 14h1v1h-1zM26 14h1v1h-1zM28 14h1v1h-1zM30 14h2v1h-2zM33 14h1v1h-1zM2 15h2v1h-2zM11 15h2v1h-2zM14 15h3v1h-3zM20 15h3v1h-3zM26 15h2v1h-2zM29 15h1v1h-1zM31 15h2v1h-2zM2 16h1v1h-1zM5 16h1v1h-1zM7 16h2v1h-2zM10 16h3v1h-3zM17 16h1v1h-1zM19 16h2v1h-2zM22 16h7v1h-7zM30 16h1v1h-1zM33 16h1v1h-1zM2 17h1v1h-1zM4 17h2v1h-2zM9 17h1v1h-1zM11 17h1v1h-1zM16 17h4v1h-4zM23 17h1v1h-1zM26 17h3v1h-3zM2 18h1v1h-1zM4 18h2v1h-2zM7 18h2v1h-2zM10 18h3v1h-3zM15 18h2v1h-2zM19 18h1v1h-1zM21 18h5v1h-5zM28 18h1v1h-1zM30 18h1v1h-1zM33 18h1v1h-1zM2 19h2v1h-2zM5 19h1v1h-1zM9 19h2v1h-2zM13 19h3v1h-3zM17 19h2v1h-2zM20 19h1v1h-1zM22 19h1v1h-1zM25 19h1v1h-1zM27 19h1v1h-1zM31 19h3v1h-3zM3 20h1v1h-1zM6 20h1v1h-1zM8 20h3v1h-3zM13 20h3v1h-3zM17 20h3v1h-3zM22 20h4v1h-4zM29 20h1v1h-1zM31 20h1v1h-1zM33 20h1v1h-1zM3 21h1v1h-1zM7 21h1v1h-1zM11 21h1v1h-1zM13 21h2v1h-2zM16 21h1v1h-1zM19 21h2v1h-2zM23 21h1v1h-1zM25 21h3v1h-3zM29 21h1v1h-1zM33 21h2v1h-2zM2 22h2v1h-2zM5 22h1v1h-1zM8 22h1v1h-1zM12 22h4v1h-4zM17 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM26 22h1v1h-1zM28 22h1v1h-1zM30 22h2v1h-2zM33 22h2v1h-2zM2 23h2v1h-2zM6 23h1v1h-1zM9 23h1v1h-1zM11 23h1v1h-1zM16 23h1v1h-1zM18 23h2v1h-2zM21 23h1v1h-1zM24 23h3v1h-3zM31 23h1v1h-1zM33 23h1v1h-1zM5 24h8v1h-8zM14 24h1v1h-1zM16 24h1v1h-1zM18 24h2v1h-2zM21 24h1v1h-1zM24 24h2v1h-2zM30 24h4v1h-4zM5 25h1v1h-1zM10 25h2v1h-2zM13 25h2v1h-2zM16 25h1v1h-1zM19 25h1v1h-1zM21 25h3v1h-3zM25 25h3v1h-3zM30 25h1v1h-1zM33 25h2v1h-2zM2 26h4v1h-4zM7 26h2v1h-2zM11 26h2v1h-2zM15 26h1v1h-1zM17 26h1v1h-1zM19 26h1v1h-1zM22 26h3v1h-3zM26 26h5v1h-5zM33 26h1v1h-1zM10 27h1v1h-1zM13 27h2v1h-2zM17 27h1v1h-1zM19 27h1v1h-1zM23 27h1v1h-1zM26 27h1v1h-1zM30 27h1v1h-1zM32 27h2v1h-2zM2 28h7v1h-7zM10 28h1v1h-1zM13 28h2v1h-2zM17 28h2v1h-2zM20 28h1v1h-1zM26 28h1v1h-1zM28 28h1v1h-1zM30 28h2v1h-2zM33 28h1v1h-1zM2 29h1v1h-1zM8 29h1v1h-1zM11 29h1v1h-1zM13 29h1v1h-1zM18 29h1v1h-1zM24 29h1v1h-1zM26 29h1v1h-1zM30 29h1v1h-1zM33 29h2v1h-2zM2 30h1v1h-1zM4 30h3v1h-3zM8 30h1v1h-1zM10 30h4v1h-4zM15 30h2v1h-2zM18 30h1v1h-1zM24 30h1v1h-1zM26 30h6v1h-6zM33 30h2v1h-2zM2 31h1v1h-1zM4 31h3v1h-3zM8 31h1v1h-1zM11 31h1v1h-1zM13 31h1v1h-1zM20 31h3v1h-3zM28 31h3v1h-3zM32 31h2v1h-2zM2 32h1v1h-1zM4 32h3v1h-3zM8 32h1v1h-1zM11 32h1v1h-1zM14 32h2v1h-2zM17 32h1v1h-1zM19 32h2v1h-2zM22 32h1v1h-1zM24 32h1v1h-1zM26 32h1v1h-1zM28 32h3v1h-3zM32 32h1v1h-1zM2 33h1v1h-1zM8 33h1v1h-1zM12 33h4v1h-4zM17 33h4v1h-4zM23 33h1v1h-1zM26 33h1v1h-1zM2 34h7v1h-7zM10 34h1v1h-1zM12 34h1v1h-1zM14 34h1v1h-1zM19 34h1v1h-1zM21 34h7v1h-7zM34 34h1v1h-1z" fill="#1d2340"/></svg></div><p class="qr-end" id="qr-end">andrebacchi.github.io/science-kart</p><div class="acts"><button class="btn" type="button" id="qr-copiar">Copiar link</button><button class="btn ghost" type="button" id="qr-partilhar" hidden>Compartilhar</button></div><p class="fine">Aponte a câmera do celular para o código. QR Code é marca registrada da DENSO WAVE INCORPORATED.</p></div></dialog>
+<dialog class="dlg" id="instalar" lang="pt-BR" aria-label="Instalar o Science Kart"><div class="top"><button class="pill" type="button" data-fechar>Fechar</button></div><div class="body"><span class="eyebrow">Aplicativo</span><h3>Instalar o jogo</h3><p>O jogo fica na tela inicial como um aplicativo, abre em tela cheia e funciona sem internet depois da primeira visita.</p><p class="fora" id="instalar-fora" hidden>Você abriu este jogo por dentro de outro app, como o BACCHI LAB, e daqui não dá para instalar. Toque em <kbd>⋮</kbd> no alto da tela e em <b>Abrir no Chrome</b>; lá, toque de novo em <b>Instalar</b>.</p><div class="tabs" id="abas"></div><ol class="steps" id="passos"></ol></div></dialog>
 <div class="overlay" id="ovTitle" hidden>
   <div class="card">
     <p>Escolha como quer jogar.</p>
@@ -1518,7 +1548,15 @@ const SFXB={skid:'data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE
 const MUSVOL=.30,SFXVOL=1.4;
 let MUS=null,MUSOFF=false;try{MUSOFF=localStorage.getItem('fc-mus')==='0';}catch(_){}
 const SFX={};let SFXG=null,ENGS=null,SKDS=null;
-function musicOn(){try{if(!MUS){MUS=new Audio(MUSIC.default);MUS.loop=true;MUS.volume=MUSVOL;}if(!MUSOFF&&MUS.paused)MUS.play().catch(()=>{});}catch(_){}}
+function musicOn(){try{if(!MUS){MUS=new Audio(MUSIC.default);MUS.loop=true;MUS.volume=MUSVOL;MUS.preservesPitch=true;MUS.webkitPreservesPitch=true;}}catch(_){}}
+function musicTempo(r){try{if(MUS){MUS.preservesPitch=true;MUS.webkitPreservesPitch=true;MUS.playbackRate=r;}}catch(_){}}
+let musTry=0;
+// the music belongs to the race: silent in menus and during the countdown, starts when the countdown ends, rests on pause and at the finish;
+// leaving the race rewinds it, so every race starts from the top at normal tempo
+function musicTick(){if(!MUS)return;
+  if(mode==='race'){if(!MUSOFF&&MUS.paused&&performance.now()>musTry){musTry=performance.now()+1000;MUS.play().catch(()=>{});}}
+  else if(mode==='paused'||mode==='done'){if(!MUS.paused)MUS.pause();}
+  else{if(!MUS.paused)MUS.pause();if(MUS.currentTime>0){try{MUS.currentTime=0;}catch(_){}}if(MUS.playbackRate!==1)musicTempo(1);}}
 function sfxLoad(){if(!ac||SFXG)return;SFXG=ac.createGain();SFXG.gain.value=SFXVOL;SFXG.connect(ac.destination);
   for(const k in SFXB){const s=SFXB[k],bin=atob(s.split(',')[1]),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);
     ac.decodeAudioData(u.buffer,buf=>{SFX[k]=buf;if(k==='engine'||k==='skid')loopStart(k);},()=>{});}}
@@ -1552,15 +1590,15 @@ function sfxMap(f,d,t,f2,vol){
 const uiLast={};function uiSfx(k,vol,rate){const n=performance.now();if(uiLast[k]&&n-uiLast[k]<70)return true;uiLast[k]=n;return sfx(k,vol,rate);}
 // every button gets a click, unless a beep already made one a moment ago
 document.addEventListener('click',e=>{if(!e.target.closest)return;const b=e.target.closest('button');if(b&&!b.closest('#ovPress'))setTimeout(()=>uiSfx('swap',.6,1),0);});
-addEventListener('keydown',e=>{if(e.code==='KeyM'&&!e.repeat){MUSOFF=!MUSOFF;try{localStorage.setItem('fc-mus',MUSOFF?'0':'1');}catch(_){}if(MUS){if(MUSOFF)MUS.pause();else MUS.play().catch(()=>{});}}});
-document.addEventListener('visibilitychange',()=>{try{if(document.hidden){if(MUS)MUS.pause();if(ac)ac.suspend();}else{if(ac)ac.resume();if(MUS&&!MUSOFF&&ac)MUS.play().catch(()=>{});}}catch(_){}});
+addEventListener('keydown',e=>{if(e.code==='KeyM'&&!e.repeat){MUSOFF=!MUSOFF;try{localStorage.setItem('fc-mus',MUSOFF?'0':'1');}catch(_){}if(MUS){if(MUSOFF)MUS.pause();}}});
+document.addEventListener('visibilitychange',()=>{try{if(document.hidden){if(MUS)MUS.pause();if(ac)ac.suspend();}else{if(ac)ac.resume();}}catch(_){}});
 function beep(f,d=0.12,type='square',f2=null,vol=0.06){if(!ac)return;if(sfxMap(f,d,type,f2,vol))return;const o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.setValueAtTime(f,ac.currentTime);
   if(f2)o.frequency.exponentialRampToValueAtTime(f2,ac.currentTime+d);g.gain.setValueAtTime(vol*1.4,ac.currentTime);g.gain.exponentialRampToValueAtTime(0.0001,ac.currentTime+d);
   o.connect(g).connect(ac.destination);o.start();o.stop(ac.currentTime+d);}
 function audioOn(){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();ac.resume();musicOn();sfxLoad();
   if(!eng){const o=ac.createOscillator(),o2=ac.createOscillator(),f=ac.createBiquadFilter(),g=ac.createGain();o.type='sawtooth';o2.type='square';f.type='lowpass';f.frequency.value=520;g.gain.value=0;
     o.connect(f);o2.connect(f);f.connect(g).connect(ac.destination);o.start();o2.start();eng={o,o2,g};}}catch(_){}}
-function engineUpdate(){if(!eng)return;const on=(mode==='race'||mode==='count')&&player;const v=on?Math.abs(player.v):0,b=on&&player.boostT>0?60:0;
+function engineUpdate(){musicTick();if(!eng)return;const on=(mode==='race'||mode==='count')&&player;const v=on?Math.abs(player.v):0,b=on&&player.boostT>0?60:0;
   if(ENGS){const rate=.85+Math.min(v,75)*.03+(b?.35:0);ENGS.src.playbackRate.setTargetAtTime(rate,ac.currentTime,.06);ENGS.g.gain.setTargetAtTime(on?.13+Math.min(v,75)*.0008:0,ac.currentTime,.12);eng.g.gain.setTargetAtTime(0,ac.currentTime,.05);}
   else{const f=46+v*3.4+b;eng.o.frequency.setTargetAtTime(f,ac.currentTime,.05);eng.o2.frequency.setTargetAtTime(f*.5+3,ac.currentTime,.05);eng.g.gain.setTargetAtTime(on?.022:0,ac.currentTime,.1);}
   if(SKDS){const sk=on&&mode==='race'&&player.drift&&player.y<=0&&v>12;SKDS.g.gain.setTargetAtTime(sk?.22:0,ac.currentTime,.06);SKDS.src.playbackRate.setTargetAtTime(.85+v*.006,ac.currentTime,.1);}}
@@ -1845,11 +1883,34 @@ function readPad(p,s,E){if(!p){s.on=false;s.steer=0;s.gas=0;s.brake=s.drift=s.lo
   s.steer=dz(p.axes[0]||0);if(bt(14))s.steer=-1;if(bt(15))s.steer=1;
   s.gas=Math.max(bt(0)?1:0,val(7));s.brake=bt(1)||val(6)>.3;s.drift=bt(5)||bt(2);
   if(edge(5)||edge(2))E.d=1;if(edge(4))E.i=1;if(edge(3))E.p=1;
-  const mb=menuBtn();if(mb&&(edge(0)||edge(9)))mb.click();else if(edge(9)&&(mode==='race'||mode==='count'))pause();
+  const mb=menuBtn();if(mb)padMenu(p,s,edge,mb);else if(edge(9)&&(mode==='race'||mode==='count'))pause();
   if(mode==='select'&&(edge(14)||edge(15)||(Math.abs(p.axes[0]||0)>.6&&!s.prev.ax)))stepSel(edge(14)||(p.axes[0]||0)<-.6?-1:1);
   if(edge(8))setFx(!fx);s.look=bt(10);if(edge(11)&&(mode==='race'||mode==='count'||mode==='done'))setCam(camMode+1);
-  s.prev=p.buttons.map(b=>b.pressed);s.prev.ax=Math.abs(p.axes[0]||0)>.6;}
-function pollPad(){let pads=[];try{pads=navigator.getGamepads?[...navigator.getGamepads()]:[];}catch(_){}pads=pads.filter(x=>x&&x.connected);
+  s.prev=p.buttons.map(b=>b.pressed);s.prev.ax=Math.abs(p.axes[0]||0)>.6;s.prev.ay=(p.axes[1]||0)<-.6?-1:(p.axes[1]||0)>.6?1:0;}
+
+const PBACK={ovRace:'raceBack',ovBattle:'battleBack',ovStage:'stageBack',ovSel:'selBack',ovItems:'itemsBack',ovPause:'resumeBtn'};
+function padFocus(el){document.querySelectorAll('.padfocus').forEach(e=>e.classList.remove('padfocus'));if(el){el.classList.add('padfocus');try{el.focus({preventScroll:true});}catch(_){}try{el.scrollIntoView({block:'nearest'});}catch(_){}}}
+// menus with a controller: d-pad or left stick moves the highlight, A confirms, B goes back, Start takes the main button
+function padMenu(p,s,edge,mb){
+  const ov=[...document.querySelectorAll('.overlay')].find(o=>!o.hidden);
+  if(!ov||ov.id==='ovPress'){if(edge(0)||edge(9))mb.click();return;}
+  const ax=p.axes[0]||0,ay=p.axes[1]||0;
+  const up=edge(12)||(ay<-.6&&s.prev.ay!==-1),dn=edge(13)||(ay>.6&&s.prev.ay!==1),lf=edge(14)||(ax<-.6&&!s.prev.ax),rt=edge(15)||(ax>.6&&!s.prev.ax);
+  const items=[...ov.querySelectorAll('button,summary')].filter(e=>!e.disabled&&e.offsetParent!==null&&e.getBoundingClientRect().width>0);
+  let cur=items.find(e=>e.classList.contains('padfocus'))||null;
+  if(edge(0)&&cur){cur.click();return;}
+  if(edge(9)){mb.click();return;}
+  if(edge(1)){const bk=PBACK[ov.id]&&$(PBACK[ov.id]);if(bk&&!bk.hidden){bk.click();return;}}
+  const dir=up?'u':dn?'d':(lf&&ov.id!=='ovSel')?'l':(rt&&ov.id!=='ovSel')?'r':null;
+  if(edge(0)&&!cur){mb.click();return;}
+  if(!dir)return;
+  if(!cur){padFocus(items.includes(mb)?mb:items[0]);beep(660,.05,'square',null,.03);return;}
+  const c=cur.getBoundingClientRect(),cx=c.left+c.width/2,cy=c.top+c.height/2;let best=null,bs=1e9;
+  for(const e of items){if(e===cur)continue;const r=e.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,dx=x-cx,dy=y-cy;
+    let ok,sc;if(dir==='r'){ok=dx>6;sc=dx+2.5*Math.abs(dy);}else if(dir==='l'){ok=dx<-6;sc=-dx+2.5*Math.abs(dy);}else if(dir==='d'){ok=dy>6;sc=dy+2.5*Math.abs(dx);}else{ok=dy<-6;sc=-dy+2.5*Math.abs(dx);}
+    if(ok&&sc<bs){bs=sc;best=e;}}
+  if(best){padFocus(best);beep(660,.05,'square',null,.03);}}
+function pollPad(){let pads=[];try{pads=navigator.getGamepads?[...navigator.getGamepads()]:[];}catch(_){}pads=pads.filter(x=>x&&x.connected);document.body.classList.toggle('padon',pads.length>0);
   if(MP){if(pads.length>=2){readPad(pads[0],gp,EDG[0]);readPad(pads[1],gp2,EDG[1]);}else{readPad(null,gp,EDG[0]);readPad(pads[0]||null,gp2,EDG[1]);}}
   else{readPad(pads[0]||null,gp,EDG[0]);readPad(null,gp2,EDG[1]);}}
 addEventListener('gamepadconnected',()=>toast('Controle conectado'));
@@ -2044,7 +2105,7 @@ function stepRacer(r,inp,dt){const c=r.ch,cc=(BATTLE?BSPEED:CCMUL[CC])*(r.inf?1.
   if(!BATTLE){const lap=Math.floor(r.raceDist/L)+1;
   if(lap>r.lastLap&&!r.finished){const clk=raceT+(mode==='done'?doneT:0);r.lapT.push(clk-r.lapStart);r.lapStart=clk;r.lastLap=lap;
     if(SURTO){}else if(lap>LAPS){r.finished=true;r.finishT=raceT+(mode==='done'?doneT:0);if(r.isPlayer)finish(r);}
-    else if(r.isPlayer&&(TR=r)){if(lap===LAPS){toast('Última volta!',2);[660,880,1100].forEach((f,i)=>setTimeout(()=>beep(f,.15,'square',null,.05),i*110));}else{toast('Volta '+lap,1.6);beep(880,.15,'square',null,.05);}}}
+    else if(r.isPlayer&&(TR=r)){if(lap===LAPS){musicTempo(1.1);toast('Última volta!',2);[660,880,1100].forEach((f,i)=>setTimeout(()=>beep(f,.15,'square',null,.05),i*110));}else{toast('Volta '+lap,1.6);beep(880,.15,'square',null,.05);}}}
   if(r.isPlayer){if(Math.abs(inp.steer)>.3&&r.v>5)steerAccum+=dt;if(steerAccum>1.4)tut('steer');
     const th=Math.atan2(TX[r.idx],TZ[r.idx]);if(Math.cos(r.h-th)<-.2&&r.v>4)r.wrongT=(r.wrongT||0)+dt;else r.wrongT=0;if(r.wrongT>1.2&&r.wrongT-dt<=1.2){TR=r;toast('Contramão!',1.6,true);}}}
   // visuals state
@@ -2858,6 +2919,51 @@ if(document.fonts&&document.fonts.load){Promise.race([document.fonts.load('20px 
 setTimeout(boot,30);
 window.__fc={setMP(v){MP=v;syncMP();},get players(){return players},get views(){return views},setSel(a,b){selIdx=a;selIdx2=b;},setBattle,setSub(bs,rs){if(bs)BSUB=bs;if(rs)RSUB=rs;syncFlags();syncOpts();},get SMP(){return SMP},get SURTO(){return SURTO},get SMPS(){return SMPS},get BATTLE(){return BATTLE},get ARENA(){return ARENA},ARENAS,arenaHW,get pets(){return pets},cam(dt){updateCamera(dt)},showBanner,toast,get camPos(){return camPos},get SX(){return SX},get SZ(){return SZ},get camH(){return camH},get CAMLEAD(){return CAMLEAD},AIP,AIC,AIC0:JSON.parse(JSON.stringify(AIC)),AIT,get pickups(){return pickups},get CC(){return CC},setSink(v){SINK=v;},sim(t){for(let i=0;i<t*60;i++)update(1/60);},get racers(){return racers},get mode(){return mode},get L(){return L},N,SX,SZ,SY,startRace,toSelect,keys,setTrack,get TI(){return TI},get TRK(){return TRK},TRACKS,setRev(v){setTrack(TI,v)},setMir(v){MIR=v},get MIR(){return MIR},get REV(){return REV},get hazards(){return hazards},get shots(){return shots},get now(){return now},set now(v){now=v},useItem,giveItem,trackAt};
 })();
+
+/* ───────── QR code, instalar e funcionar sem internet (padrão do BACCHI LAB) ───────── */
+{
+const q=s=>document.querySelector(s);
+const ENDERECO='https://andrebacchi.github.io/science-kart/';
+for(const b of document.querySelectorAll('dialog [data-fechar]'))b.onclick=()=>b.closest('dialog').close();
+for(const d of document.querySelectorAll('dialog.dlg'))d.addEventListener('click',e=>{if(e.target===d)d.close();});
+for(const d of document.querySelectorAll('dialog.dlg'))d.addEventListener('keydown',e=>e.stopPropagation());   // teclas do jogo não vazam para a janela
+q('#qr-btn').onclick=()=>{q('#qr-partilhar').hidden=!navigator.share;q('#qr').showModal();};
+q('#qr-copiar').onclick=async e=>{const b=e.currentTarget;
+  try{await navigator.clipboard.writeText(ENDERECO);b.textContent='Link copiado';}
+  catch(_){const r=document.createRange();r.selectNodeContents(q('#qr-end'));const sel=getSelection();sel.removeAllRanges();sel.addRange(r);b.textContent='Selecionado: copie';}
+  setTimeout(()=>{b.textContent='Copiar link';},2200);};
+q('#qr-partilhar').onclick=()=>{navigator.share({title:'Science Kart',url:ENDERECO}).catch(()=>{});};
+/* "navegador" (aba comum), "propria" (instalado, na janela dele) ou "outra" (aberto dentro de outro app instalado, como o BACCHI LAB) */
+function janelaApp(k){
+  if(!(matchMedia('(display-mode: standalone)').matches||navigator.standalone===true))return 'navegador';
+  let fora=false,marca=false;
+  try{const r=document.referrer&&new URL(document.referrer);fora=!!r&&r.origin===location.origin&&!r.pathname.startsWith(new URL('./',location.href).pathname);}catch(e){}
+  try{if(!document.referrer)localStorage.setItem(k,'1');if(!fora)sessionStorage.setItem(k,'1');marca=localStorage.getItem(k)==='1'||sessionStorage.getItem(k)==='1';}catch(e){}
+  return !fora||marca?'propria':'outra';}
+function appInstalado(k){
+  if(!navigator.getInstalledRelatedApps)return Promise.resolve(false);
+  return navigator.getInstalledRelatedApps().then(l=>{if(l.length){try{localStorage.setItem(k,'1');}catch(e){}}return l.length>0;}).catch(()=>false);}
+const botao=q('#instalar-btn'),JAN_K='science-kart:instalado';let adiado=null,janela=janelaApp(JAN_K);
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();adiado=e;});
+addEventListener('appinstalled',()=>{try{localStorage.setItem(JAN_K,'1');}catch(_){}botao.hidden=true;});
+botao.hidden=janela==='propria';
+if(janela==='outra')appInstalado(JAN_K).then(ok=>{if(ok){janela='propria';botao.hidden=true;}});
+const PASSOS={
+  ios:['Abra esta página no <b>Safari</b>.','Toque em <b>Compartilhar</b> <kbd>⬆︎</kbd>.','Toque em <b>Adicionar à Tela de Início</b>.','Confirme o nome e toque em <b>Adicionar</b>.'],
+  android:['Abra esta página no <b>Chrome</b>.','Toque no menu <kbd>⋮</kbd>.','Toque em <b>Instalar app</b> ou <b>Adicionar à tela inicial</b>.','Confirme. O ícone aparece junto dos seus apps.'],
+  desktop:['<b>Chrome ou Edge:</b> use o ícone de instalar na barra de endereço, ou o menu <kbd>⋮</kbd> → <b>Transmitir, salvar e compartilhar</b> → <b>Instalar página como app</b>.','<b>Safari (Mac):</b> menu <b>Arquivo</b> → <b>Adicionar ao Dock</b>.','<b>Qualquer navegador:</b> salve nos favoritos com <kbd>Ctrl</kbd>+<kbd>D</kbd>.']};
+const ABAS=[['ios','iPhone e iPad'],['android','Android'],['desktop','Computador']];
+const plataforma=()=>{const u=navigator.userAgent||'';if(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1))return 'ios';return /Android/.test(u)?'android':'desktop';};
+const aba=k=>{q('#abas').innerHTML=ABAS.map(([id,l])=>`<button class="chip" type="button" data-aba="${id}" aria-pressed="${id===k}">${l}</button>`).join('');q('#passos').innerHTML=PASSOS[k].map(t=>`<li>${t}</li>`).join('');};
+q('#abas').addEventListener('click',e=>{const b=e.target.closest('[data-aba]');if(b)aba(b.dataset.aba);});
+botao.onclick=async()=>{
+  if(adiado){try{adiado.prompt();const r=await adiado.userChoice;adiado=null;if(r&&r.outcome==='accepted')return;}catch(_){}}
+  q('#instalar-fora').hidden=janela!=='outra';aba(plataforma());q('#instalar').showModal();};
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1')){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+  // a música (se existir) é guardada inteira em segundo plano, para tocar sem internet
+  setTimeout(async()=>{try{const c=await caches.open('science-kart-fixos-v1');const u=new URL(MUSIC.default,location.href).href;if(!(await c.match(u)))await c.add(u);}catch(_){}},4000);}
+}
 </script>
 
 </body></html>

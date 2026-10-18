@@ -7,8 +7,14 @@ Jogo de kart 3D estilo Mario Kart 64 com cientistas famosos como pilotos. Um ún
 ## Controles
 Setas ou WASD para dirigir, Espaço ou Shift para derrapar, E ou X para usar o item, Q para o poder do piloto, V troca a câmera, M liga/desliga a música.
 
+## Controle (joystick)
+Funciona com controle padrão (Xbox, PlayStation, GameSir no celular etc.). Na corrida: analógico ou direcional vira, A ou RT aceleram, B ou LT freiam, RB ou X derrapam, LB usa o item, Y usa o poder, L3 olha para trás, R3 troca a câmera, Start pausa, Back liga o filtro N64. Nos menus: direcional ou analógico move o destaque, A confirma, B volta e Start abre o botão principal. Com controle conectado, os botões de toque somem.
+
 ## Música
-O arquivo `audio/musica.mp3` não faz parte do repositório. Coloque a sua faixa nesse caminho (loop, 30% de volume). Sem ele o jogo roda sem música.
+A música só toca na corrida: começa quando a contagem termina e acelera uns 10% na última volta (o tom não muda). A tecla M liga e desliga. O arquivo `audio/musica.mp3` não faz parte do repositório; coloque a sua faixa nesse caminho (loop, 30% de volume). Sem ele o jogo roda sem música.
+
+## Instalar e QR code
+Na tela inicial há o botão ‹ Bacchi Lab (volta ao hub), Instalar (PWA, funciona sem internet depois da primeira visita) e QR code para abrir no celular.
 
 ## Créditos dos sons
 Efeitos sonoros (motor, derrapagem, impacto, moeda, quebra, disparo, cliques de menu) dos kits iniciais de Kenney (https://kenney.nl), licença MIT:
