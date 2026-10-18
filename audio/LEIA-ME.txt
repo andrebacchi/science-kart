@@ -1,0 +1,2 @@
+Coloque aqui a música de fundo como "musica.mp3" (tocada em loop, volume 30%, tecla M liga/desliga).
+Sem o arquivo o jogo roda normalmente, só sem música.
