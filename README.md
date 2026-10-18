@@ -5,7 +5,7 @@ Jogo de kart 3D estilo Mario Kart 64 com cientistas famosos como pilotos. Um ún
 **Versão piloto.** Pistas: Gaiola dos Ratos (treino) e Bancada de St. Mary's (Fleming, 1928), com modo reverso (entardecer), itens de ciência e modo batalha.
 
 ## Controles
-Setas ou WASD para dirigir, espaço para derrapar, tecla M liga/desliga a música.
+Setas ou WASD para dirigir, Espaço ou Shift para derrapar, E ou X para usar o item, Q para o poder do piloto, V troca a câmera, M liga/desliga a música.
 
 ## Música
 O arquivo `audio/musica.mp3` não faz parte do repositório. Coloque a sua faixa nesse caminho (loop, 30% de volume). Sem ele o jogo roda sem música.
