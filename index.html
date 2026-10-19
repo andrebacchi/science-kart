@@ -1289,7 +1289,7 @@ function addFurn(nm,upp,D,x,y,z,ry){const f=ENVIMG.furn[nm],grp=new THREE.Group(
  // shelves stand on the lab floor, beyond the bench: only their upper part shows above the bench top
  [['bkshelf',cx-170,cz-(bd/2+70)],['bshelf',cx+190,cz+(bd/2+70)]].forEach(([nm,x,z])=>addFurn(nm,.55,36,x,FLOOR+.05,z,Math.atan2(cx-x,cz-z)));}
 // the environment switch: called from applyEnv / setBattleEnv
-FENV={set(trk){const on=!!trk&&trk.key==='fleming',rev=on&&REV;
+FENV={set(trk){const on=!!trk&&trk.key==='fleming',rev=on&&REV;try{ROLL.forEach(f=>{f.g.visible=on;});FALL.g.visible=on;if(!on)FALL.pilot.visible=false;}catch(_){}
     FWALL.visible=FCUR.visible=FBEAM.visible=FCEIL.visible=FOUT.visible=dome.visible=on;CLD.forEach(c=>c.m.visible=on);sky.visible=!on;
     if(labCeil)labCeil.position.y=on?6000:330;   // the lab ceiling of the other tracks leaves; this track has its own disc
     camera.far=on?2600:700;camera.updateProjectionMatrix();
